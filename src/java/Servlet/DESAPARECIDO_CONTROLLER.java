@@ -116,12 +116,12 @@ public class DESAPARECIDO_CONTROLLER extends HttpServlet {
 
     private String registrarUsuario(HttpServletRequest request, HttpServletResponse response) throws JSONException {
         String nombre = request.getParameter("nombre");
-        String apelido = request.getParameter("apelido");
+        String apellido = request.getParameter("apellido");
         String sexo = request.getParameter("sexo");
         String email = request.getParameter("email");
-        String pass = request.getParameter("pass");
+        String pass = request.getParameter("password");
         String estado = request.getParameter("estado");
-        return UsuarioController.registrarUsuario(nombre, apelido, sexo, email, pass, estado).toString();
+        return UsuarioController.registrarUsuario(nombre, apellido, sexo, email, pass, estado).toString();
     }
 
     private String registrarPubicacion(HttpServletRequest request, HttpServletResponse response) throws IOException {
