@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 16-oct-2017 23:50:09 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="datos.Imagen" table="imagen" schema="public" optimistic-lock="version">
+        <id name="imagenid" type="int">
+            <column name="imagenid" />
+            <generator class="assigned" />
+        </id>
+        <property name="nombre" type="string">
+            <column name="nombre" length="1000" />
+        </property>
+        <property name="fechaingreso" type="timestamp">
+            <column name="fechaingreso" length="29" />
+        </property>
+        <property name="dirarchivo" type="string">
+            <column name="dirarchivo" length="500" />
+        </property>
+        <property name="exencionimg" type="string">
+            <column name="exencionimg" length="100" />
+        </property>
+        <property name="estado" type="string">
+            <column name="estado" length="100" />
+        </property>
+        <set name="anuncios" table="anuncio" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="imagenid" />
+            </key>
+            <one-to-many class="datos.Anuncio" />
+        </set>
+    </class>
+</hibernate-mapping>
