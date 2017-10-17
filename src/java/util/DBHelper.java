@@ -30,10 +30,10 @@ public class DBHelper {
 
     public DBHelper() {
         session = HibernateUtil.getSessionFactory().openSession();
-        tx = session.beginTransaction();
     }
 
     public int add(Object o) throws Exception {
+        tx = session.beginTransaction();
         Integer id = (Integer) session.save(o);
         tx.commit();
         return id;

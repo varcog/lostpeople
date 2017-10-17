@@ -10,6 +10,7 @@ import java.util.logging.Logger;
 import javax.jws.WebService;
 import javax.jws.WebMethod;
 import javax.jws.WebParam;
+import negocio.AnuncioController;
 import negocio.UsuarioController;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -43,5 +44,14 @@ public class desaparecido {
         } catch (JSONException ex) {
             return "false";
         }
+    }
+
+    /**
+     * Web service operation
+     */
+    @WebMethod(operationName = "listarAnuncios")
+    public String listarAnuncios() {
+        return AnuncioController.listarAnuncios().toString();
+
     }
 }
