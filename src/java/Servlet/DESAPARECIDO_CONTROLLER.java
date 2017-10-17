@@ -7,11 +7,16 @@ package Servlet;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import negocio.UsuarioController;
+import org.json.JSONException;
 
 /**
  *
@@ -31,28 +36,42 @@ public class DESAPARECIDO_CONTROLLER extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String evento = request.getParameter("evento");
-        switch (evento) {
-            case "REGISTRAR_USUARIO":
-                
-                break;
-            default:
-                throw new AssertionError();
-        }
-        
-        
-        response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet DESAPARECIDO_CONTROLLER</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet DESAPARECIDO_CONTROLLER at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
+        try {
+            response.setContentType("text/html;charset=UTF-8");
+
+            String evento = request.getParameter("evento");
+            String resp;
+            switch (evento) {
+                case "REGISTRAR_USUARIO":
+                    resp = registrarUsuario(request, response);
+                    break;
+                case "REGISTRAR_PUBLICACION":
+                    resp = registrarPubicacion(request, response);
+                    break;
+                case "LISTAR_PUBLICACIONES":
+                    resp = "";
+                    break;
+                case "VER_PUBLICACION":
+                    resp = "";
+                    break;
+                case "COMENTAR":
+                    resp = "";
+                    break;
+                default:
+                    resp = "false";
+            }
+
+            response.setContentType("text/html;charset=UTF-8");
+            try (PrintWriter out = response.getWriter()) {
+                /* TODO output your page here. You may use following sample code. */
+                out.println(resp);
+            }
+        } catch (JSONException ex) {
+            response.setContentType("text/html;charset=UTF-8");
+            try (PrintWriter out = response.getWriter()) {
+                /* TODO output your page here. You may use following sample code. */
+                out.println("false");
+            }
         }
     }
 
@@ -94,5 +113,26 @@ public class DESAPARECIDO_CONTROLLER extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
+
+    private String registrarUsuario(HttpServletRequest request, HttpServletResponse response) throws JSONException {
+        String nombre = request.getParameter("nombre");
+        String apelido = request.getParameter("apelido");
+        String sexo = request.getParameter("sexo");
+        String email = request.getParameter("email");
+        String pass = request.getParameter("pass");
+        String estado = request.getParameter("estado");
+        return UsuarioController.registrarUsuario(nombre, apelido, sexo, email, pass, estado).toString();
+    }
+
+    private String registrarPubicacion(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        HttpSession sesion = request.getSession();
+        try {
+            int usuario = (int) sesion.getAttribute("usuario");
+        } catch (Exception e) {
+            response.sendRedirect("index.html");
+            return "";
+        }
+        return "";
+    }
 
 }

@@ -41,7 +41,7 @@ public class DBHelper {
 
     public List buscarTodos(Class cla) throws Exception {
         try {
-            List res = session.createSQLQuery("SELECT * FROM " + cla.getSimpleName()).list();
+            List res = session.createSQLQuery("SELECT * FROM " + cla.getSimpleName()).addEntity(cla).list();
             if (res.size() > 0) {
                 return res;
             }
@@ -53,7 +53,7 @@ public class DBHelper {
 
     public List buscar(Class cla, String columna, String valor) {
         try {
-            List res = session.createSQLQuery("SELECT * FROM " + cla.getSimpleName() + " WHERE " + columna + " = " + valor).list();
+            List res = session.createSQLQuery("SELECT * FROM " + cla.getSimpleName() + " WHERE " + columna + " = " + valor).addEntity(cla).list();
             return res;
         } catch (Exception e) {
             throw e;
