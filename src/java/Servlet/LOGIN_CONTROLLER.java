@@ -43,7 +43,7 @@ public class LOGIN_CONTROLLER extends HttpServlet {
             HttpSession sesion = request.getSession();
             String email, pass;
             email = request.getParameter("email");
-            pass = request.getParameter("pass");
+            pass = request.getParameter("password");
             JSONObject resp = UsuarioController.validarUsuario(email, pass);
             //deberíamos buscar el usuario en la base de datos, pero dado que se escapa de este tema, ponemos un ejemplo en el mismo código
             if (resp.getBoolean("res")) {
@@ -51,12 +51,10 @@ public class LOGIN_CONTROLLER extends HttpServlet {
                 sesion.setAttribute("usuario", resp.getInt("id"));
                 sesion.setAttribute("email", resp.getString("email"));
                 //redirijo a página con información de login exitoso
-                response.sendRedirect("loginExito.jsp");
+                response.sendRedirect("main.html");
             } else {
-                try (PrintWriter out = response.getWriter()) {
-                    /* TODO output your page here. You may use following sample code. */
-                    out.println(resp.toString());
-                }
+                response.sendRedirect("index.html");
+
             }
         } catch (JSONException ex) {
             Logger.getLogger(LOGIN_CONTROLLER.class.getName()).log(Level.SEVERE, null, ex);

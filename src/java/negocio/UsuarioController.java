@@ -41,6 +41,7 @@ public class UsuarioController {
                 o.put("mensaje", "REGISTRADO CORRECTAMENTE");
             } catch (Exception ex) {
                 o.put("res", false);
+                System.out.println(ex);
                 o.put("mensaje", "ERROR AL CREAR USUARIO, INTENTELO DE NUEVO");
             }
         }
@@ -56,6 +57,7 @@ public class UsuarioController {
                 o.put("res", true);
                 o.put("id", u.getUsuarioid());
                 o.put("mensaje", "USUARIO CORRECTO");
+                o.put("email", email);
             }else{
                 o.put("res", false);
                 o.put("mensaje", "CONTRASEÑA INCORRECTA");

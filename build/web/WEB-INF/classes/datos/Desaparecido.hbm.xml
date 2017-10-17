@@ -1,0 +1,54 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 17-oct-2017 1:11:48 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="datos.Desaparecido" table="desaparecido" schema="public" optimistic-lock="version">
+        <id name="desaparecidoid" type="int">
+            <column name="desaparecidoid" />
+            <generator class="increment" />
+        </id>
+        <property name="nombre" type="string">
+            <column name="nombre" length="100" not-null="true" />
+        </property>
+        <property name="apellido" type="string">
+            <column name="apellido" length="200" not-null="true" />
+        </property>
+        <property name="edad" type="int">
+            <column name="edad" not-null="true" />
+        </property>
+        <property name="sexo" type="string">
+            <column name="sexo" length="50" not-null="true" />
+        </property>
+        <property name="estatura" type="java.lang.Integer">
+            <column name="estatura" />
+        </property>
+        <property name="colorpelo" type="string">
+            <column name="colorpelo" length="100" />
+        </property>
+        <property name="colorpiel" type="string">
+            <column name="colorpiel" length="100" />
+        </property>
+        <property name="vestimenta" type="string">
+            <column name="vestimenta" length="500" />
+        </property>
+        <property name="constitucion" type="string">
+            <column name="constitucion" length="200" />
+        </property>
+        <property name="otros" type="string">
+            <column name="otros" length="1000" />
+        </property>
+        <property name="fechacre" type="timestamp">
+            <column name="fechacre" length="29" />
+        </property>
+        <property name="fechamod" type="timestamp">
+            <column name="fechamod" length="29" />
+        </property>
+        <set name="anuncios" table="anuncio" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="desaparecidoid" />
+            </key>
+            <one-to-many class="datos.Anuncio" />
+        </set>
+    </class>
+</hibernate-mapping>

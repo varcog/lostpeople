@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 17-oct-2017 1:11:48 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="datos.Anuncio" table="anuncio" schema="public" optimistic-lock="version">
+        <id name="anuncioid" type="int">
+            <column name="anuncioid" />
+            <generator class="increment" />
+        </id>
+        <many-to-one name="contacto" class="datos.Contacto" fetch="select">
+            <column name="contactoid" />
+        </many-to-one>
+        <many-to-one name="desaparecido" class="datos.Desaparecido" fetch="select">
+            <column name="desaparecidoid" />
+        </many-to-one>
+        <many-to-one name="imagen" class="datos.Imagen" fetch="select">
+            <column name="imagenid" />
+        </many-to-one>
+        <many-to-one name="usuario" class="datos.Usuario" fetch="select">
+            <column name="usuarioid" not-null="true" />
+        </many-to-one>
+        <property name="estado" type="string">
+            <column name="estado" length="100" not-null="true" />
+        </property>
+        <property name="fechacre" type="timestamp">
+            <column name="fechacre" length="29" />
+        </property>
+        <property name="fechamod" type="timestamp">
+            <column name="fechamod" length="29" />
+        </property>
+        <property name="observacion" type="string">
+            <column name="observacion" length="500" />
+        </property>
+        <set name="comentarios" table="comentario" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="anuncioid" not-null="true" />
+            </key>
+            <one-to-many class="datos.Comentario" />
+        </set>
+    </class>
+</hibernate-mapping>

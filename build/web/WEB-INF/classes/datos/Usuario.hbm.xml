@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 17-oct-2017 1:11:48 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="datos.Usuario" table="usuario" schema="public" optimistic-lock="version">
+        <id name="usuarioid" type="int">
+            <column name="usuarioid" />
+            <generator class="increment" />
+        </id>
+        <property name="nombre" type="string">
+            <column name="nombre" length="100" not-null="true" />
+        </property>
+        <property name="apellido" type="string">
+            <column name="apellido" length="200" not-null="true" />
+        </property>
+        <property name="sexo" type="string">
+            <column name="sexo" length="50" />
+        </property>
+        <property name="email" type="string">
+            <column name="email" length="100" not-null="true" />
+        </property>
+        <property name="pass" type="string">
+            <column name="pass" length="100" not-null="true" />
+        </property>
+        <property name="estado" type="string">
+            <column name="estado" length="50" />
+        </property>
+        <property name="fechacre" type="timestamp">
+            <column name="fechacre" length="29" />
+        </property>
+        <property name="fechamod" type="timestamp">
+            <column name="fechamod" length="29" />
+        </property>
+        <set name="anuncios" table="anuncio" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuarioid" not-null="true" />
+            </key>
+            <one-to-many class="datos.Anuncio" />
+        </set>
+    </class>
+</hibernate-mapping>
