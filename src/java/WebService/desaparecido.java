@@ -5,9 +5,14 @@
  */
 package WebService;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.jws.WebService;
 import javax.jws.WebMethod;
 import javax.jws.WebParam;
+import negocio.UsuarioController;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 /**
  *
@@ -17,10 +22,26 @@ import javax.jws.WebParam;
 public class desaparecido {
 
     /**
-     * This is a sample web service operation
+     * Web service operation
      */
-    @WebMethod(operationName = "hello")
-    public String hello(@WebParam(name = "name") String txt) {
-        return "Hello " + txt + " !";
+    @WebMethod(operationName = "registrarUsuario")
+    public String registrarUsuario(@WebParam(name = "nombre") String nombre, @WebParam(name = "apellido") String apellido, @WebParam(name = "sexo") String sexo, @WebParam(name = "email") String email, @WebParam(name = "pass") String pass, @WebParam(name = "estado") String estado) {
+        try {
+            return UsuarioController.registrarUsuario(nombre, apellido, sexo, email, pass, estado).toString();
+        } catch (JSONException ex) {
+            return "false";
+        }
+    }
+
+    /**
+     * Web service operation
+     */
+    @WebMethod(operationName = "ingresar")
+    public String ingresar(@WebParam(name = "email") String email, @WebParam(name = "contrasena") String contrasena) {
+        try {
+            return UsuarioController.validarUsuario(email, contrasena).toString();
+        } catch (JSONException ex) {
+            return "false";
+        }
     }
 }
