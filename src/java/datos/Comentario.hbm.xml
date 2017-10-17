@@ -6,7 +6,7 @@
     <class name="datos.Comentario" table="comentario" schema="public" optimistic-lock="version">
         <id name="comentarioid" type="int">
             <column name="comentarioid" />
-            <generator class="assigned" />
+            <generator class="increment" />
         </id>
         <many-to-one name="anuncio" class="datos.Anuncio" fetch="select">
             <column name="anuncioid" not-null="true" />

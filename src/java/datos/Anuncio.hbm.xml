@@ -6,7 +6,7 @@
     <class name="datos.Anuncio" table="anuncio" schema="public" optimistic-lock="version">
         <id name="anuncioid" type="int">
             <column name="anuncioid" />
-            <generator class="assigned" />
+            <generator class="increment" />
         </id>
         <many-to-one name="contacto" class="datos.Contacto" fetch="select">
             <column name="contactoid" />

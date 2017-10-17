@@ -130,8 +130,8 @@ public class DESAPARECIDO_CONTROLLER extends HttpServlet {
             int usuario = (int) sesion.getAttribute("usuario");
         } catch (Exception e) {
             response.sendRedirect("index.html");
-            return "";
         }
+        
         return "";
     }
 

@@ -6,7 +6,7 @@
     <class name="datos.Imagen" table="imagen" schema="public" optimistic-lock="version">
         <id name="imagenid" type="int">
             <column name="imagenid" />
-            <generator class="assigned" />
+            <generator class="increment" />
         </id>
         <property name="nombre" type="string">
             <column name="nombre" length="1000" />

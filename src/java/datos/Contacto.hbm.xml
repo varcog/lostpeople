@@ -6,7 +6,7 @@
     <class name="datos.Contacto" table="contacto" schema="public" optimistic-lock="version">
         <id name="contactoid" type="int">
             <column name="contactoid" />
-            <generator class="assigned" />
+            <generator class="increment" />
         </id>
         <property name="nombre" type="string">
             <column name="nombre" length="100" not-null="true" />
